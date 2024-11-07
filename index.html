@@ -36,7 +36,7 @@
         // Функция для передачи данных обратно в Unity
         function SendTelegramIDToUnity() {
             if (unityInstance && telegramID) {
-                unityInstance.SendMessage('UnityGameObjectName', 'ReceiveTelegramID', telegramID);
+                unityInstance.SendMessage('GetTelegramID', 'ReceiveTelegramID', telegramID);
             }
        }
 
