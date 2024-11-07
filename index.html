@@ -41,12 +41,13 @@
         // Интеграция с Telegram Web Apps API
 	unityInstance.SendMessage('GetTelegramID', 'ReceiveTelegramID', 'send');
         if (typeof window !== 'undefined' && typeof window.Telegram !== 'undefined' && window.Telegram.WebApp) {
-          const tg = window.Telegram.WebApp;
-          console.log("Telegram Web App initialized:", tg.initData);
+          unityInstance.SendMessage('GetTelegramID', 'ReceiveTelegramID', 'Telegram Web App');
+	  const tg = window.Telegram.WebApp;
+          //console.log("Telegram Web App initialized:", tg.initData);
 	  unityInstance.SendMessage('GetTelegramID', 'ReceiveTelegramID', 'Telegram Web App initialized');
           // Получаем Telegram ID пользователя
           const telegramID = tg.initDataUnsafe?.user?.id;
-          console.log("Telegram ID:", telegramID);
+          //console.log("Telegram ID:", telegramID);
 
           // Функция для передачи Telegram ID в Unity
           if (telegramID) {
