@@ -57,11 +57,14 @@
           // Получаем Telegram ID пользователя
           const telegramID = tg.initDataUnsafe?.user?.id;
           //console.log("Telegram ID:", telegramID);
-
+		unityInstance.SendMessage('GetTelegramID', 'ReceiveTelegramID', 'Try get id');
           // Функция для передачи Telegram ID в Unity
           if (telegramID) {
+		  unityInstance.SendMessage('GetTelegramID', 'ReceiveTelegramID', 'get id');
             unityInstance.SendMessage('GetTelegramID', 'ReceiveTelegramID', telegramID);
-          }
+          } else {
+	       unityInstance.SendMessage('GetTelegramID', 'ReceiveTelegramID', 'not get id');
+	  }
         } else {
           unityInstance.SendMessage('GetTelegramID', 'ReceiveTelegramID', 'no app');
         }} else {
