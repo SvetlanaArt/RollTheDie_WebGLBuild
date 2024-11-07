@@ -61,7 +61,8 @@
           // Функция для передачи Telegram ID в Unity
           if (telegramID) {
 		  unityInstance.SendMessage('GetTelegramID', 'ReceiveTelegramID', 'get id');
-            unityInstance.SendMessage('GetTelegramID', 'ReceiveTelegramID', telegramID);
+		  const telegramIDString = String(telegramID);
+            unityInstance.SendMessage('GetTelegramID', 'ReceiveTelegramID', telegramIDString);
           } else {
 	       unityInstance.SendMessage('GetTelegramID', 'ReceiveTelegramID', 'not get id');
 	  }
