@@ -25,6 +25,27 @@
         document.body.style.textAlign = "left";
       }
 
+      if (window.Telegram && window.Telegram.WebApp) {
+        const tg = window.Telegram.WebApp;
+        console.log("Telegram Web App initialized:", tg.initData);
+
+        // Пример: получение telegramID пользователя
+        const telegramID = tg.initDataUnsafe?.user?.id;
+        console.log("Telegram ID:", telegramID);
+
+        // Функция для передачи данных обратно в Unity
+        function SendTelegramIDToUnity() {
+            if (unityInstance && telegramID) {
+                unityInstance.SendMessage('UnityGameObjectName', 'ReceiveTelegramID', telegramID);
+            }
+       }
+
+        // Вызываем передачу данных после загрузки
+        window.onload = SendTelegramIDToUnity;
+    } else {
+        console.log("Telegram WebApp не доступен.");
+    }
+
       createUnityInstance(document.querySelector("#unity-canvas"), {
         dataUrl: "Build/RollBuild.data",
         frameworkUrl: "Build/RollBuild.framework.js",
