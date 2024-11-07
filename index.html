@@ -64,7 +64,15 @@
         } else {
           unityInstance.SendMessage('GetTelegramID', 'ReceiveTelegramID', 'no app');
         }} else {
-          unityInstance.SendMessage('GetTelegramID', 'ReceiveTelegramID', 'no tel');
+          unityInstance.SendMessage('GetTelegramID', 'ReceiveTelegramID', 'no tel new');
+if (typeof Telegram !== 'undefined')
+{
+	unityInstance.SendMessage('GetTelegramID', 'ReceiveTelegramID', 'only tel');
+	if (Telegram.WebApp)
+	{
+		unityInstance.SendMessage('GetTelegramID', 'ReceiveTelegramID', 'tel app');
+	}
+}
         }} else {
           unityInstance.SendMessage('GetTelegramID', 'ReceiveTelegramID', 'no win');
         }
