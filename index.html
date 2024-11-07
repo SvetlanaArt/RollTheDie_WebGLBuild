@@ -40,7 +40,15 @@
       }).then((unityInstance) => {
         // Интеграция с Telegram Web Apps API
 	unityInstance.SendMessage('GetTelegramID', 'ReceiveTelegramID', 'send');
-        if (window.Telegram && window.Telegram.WebApp) {
+        if (typeof window !== 'undefined')
+	{
+	  unityInstance.SendMessage('GetTelegramID', 'ReceiveTelegramID', 'window');
+		if (typeof window.Telegram !== 'undefined') 
+	{
+	   unityInstance.SendMessage('GetTelegramID', 'ReceiveTelegramID', 'telegram');
+	if (window.Telegram.WebApp)
+	{
+	 
           unityInstance.SendMessage('GetTelegramID', 'ReceiveTelegramID', 'Telegram Web App');
 	  const tg = window.Telegram.WebApp;
           //console.log("Telegram Web App initialized:", tg.initData);
@@ -54,8 +62,13 @@
             unityInstance.SendMessage('GetTelegramID', 'ReceiveTelegramID', telegramID);
           }
         } else {
-          console.log("Приложение не запущено в Telegram Web App.");
+          unityInstance.SendMessage('GetTelegramID', 'ReceiveTelegramID', 'no app');
+        }} else {
+          unityInstance.SendMessage('GetTelegramID', 'ReceiveTelegramID', 'no tel');
+        }} else {
+          unityInstance.SendMessage('GetTelegramID', 'ReceiveTelegramID', 'no win');
         }
+	
       });
     </script>
   </body>
