@@ -39,10 +39,11 @@
         // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
       }).then((unityInstance) => {
         // Интеграция с Telegram Web Apps API
+	unityInstance.SendMessage('GetTelegramID', 'ReceiveTelegramID', 'send');
         if (typeof window !== 'undefined' && typeof window.Telegram !== 'undefined' && window.Telegram.WebApp) {
           const tg = window.Telegram.WebApp;
           console.log("Telegram Web App initialized:", tg.initData);
-
+	  unityInstance.SendMessage('GetTelegramID', 'ReceiveTelegramID', 'Telegram Web App initialized');
           // Получаем Telegram ID пользователя
           const telegramID = tg.initDataUnsafe?.user?.id;
           console.log("Telegram ID:", telegramID);
