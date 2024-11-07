@@ -25,28 +25,9 @@
         document.body.style.textAlign = "left";
       }
 
-      if (window.Telegram && window.Telegram.WebApp) {
-        const tg = window.Telegram.WebApp;
-        console.log("Telegram Web App initialized:", tg.initData);
+      
 
-        // Пример: получение telegramID пользователя
-        const telegramID = tg.initDataUnsafe?.user?.id;
-        console.log("Telegram ID:", telegramID);
-
-        // Функция для передачи данных обратно в Unity
-        function SendTelegramIDToUnity() {
-            if (unityInstance && telegramID) {
-                unityInstance.SendMessage('GetTelegramID', 'ReceiveTelegramID', telegramID);
-            }
-       }
-
-        // Вызываем передачу данных после загрузки
-        window.onload = SendTelegramIDToUnity;
-    } else {
-        console.log("Telegram WebApp не доступен.");
-    }
-
-      createUnityInstance(document.querySelector("#unity-canvas"), {
+      var unityInstance = createUnityInstance(document.querySelector("#unity-canvas"), {
         dataUrl: "Build/RollBuild.data",
         frameworkUrl: "Build/RollBuild.framework.js",
         codeUrl: "Build/RollBuild.wasm",
@@ -56,6 +37,23 @@
         productVersion: "0.1",
         // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
         // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
+      }).then((unityInstance) => {
+        // Интеграция с Telegram Web Apps API
+        if (typeof window !== 'undefined' && typeof window.Telegram !== 'undefined' && window.Telegram.WebApp) {
+          const tg = window.Telegram.WebApp;
+          console.log("Telegram Web App initialized:", tg.initData);
+
+          // Получаем Telegram ID пользователя
+          const telegramID = tg.initDataUnsafe?.user?.id;
+          console.log("Telegram ID:", telegramID);
+
+          // Функция для передачи Telegram ID в Unity
+          if (telegramID) {
+            unityInstance.SendMessage('GetTelegramID', 'ReceiveTelegramID', telegramID);
+          }
+        } else {
+          console.log("Приложение не запущено в Telegram Web App.");
+        }
       });
     </script>
   </body>
