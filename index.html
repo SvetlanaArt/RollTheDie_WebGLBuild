@@ -40,7 +40,7 @@
       }).then((unityInstance) => {
         // Интеграция с Telegram Web Apps API
 	unityInstance.SendMessage('GetTelegramID', 'ReceiveTelegramID', 'send');
-        if (typeof window !== 'undefined' && typeof window.Telegram !== 'undefined' && window.Telegram.WebApp) {
+        if (window.Telegram && window.Telegram.WebApp) {
           unityInstance.SendMessage('GetTelegramID', 'ReceiveTelegramID', 'Telegram Web App');
 	  const tg = window.Telegram.WebApp;
           //console.log("Telegram Web App initialized:", tg.initData);
